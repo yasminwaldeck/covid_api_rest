@@ -1,16 +1,25 @@
 package de.neuefische.corona_rest_temp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class CoronaFrontEnd {
 
+    @JsonProperty("CountryCode")
     private String countryCode;
+
+    @JsonProperty("Average")
     private Integer average;
+
+
 
     public CoronaFrontEnd(String countryCode, Integer average){
         this.countryCode= countryCode;
         this.average = average;
     }
+
+    public CoronaFrontEnd(){}
 
     public String getCountryCode() {
         return countryCode;

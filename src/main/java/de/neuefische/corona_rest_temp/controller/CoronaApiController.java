@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @RestController
@@ -25,5 +27,9 @@ public class CoronaApiController {
         return coronaApiService.getConfirmedCasesByCountry(countryCode,date);
     }
 
+    @GetMapping("schools")
+    public String schoolsClosed(@RequestParam String countryCode, @RequestParam String date){
+        return (coronaApiService.getConfirmedCasesByCountry(countryCode,date).getAverage() < 100000) ? "Schule läuft" : "Schule läuft nicht";
 
+    }
 }
