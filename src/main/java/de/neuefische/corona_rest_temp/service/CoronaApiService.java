@@ -16,9 +16,14 @@ import java.util.Calendar;
 @Service
 public class CoronaApiService {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
+
+    public CoronaApiService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public CoronaOut getConfirmedCasesByCountry(String countryCode, String startDate){
 
@@ -29,9 +34,9 @@ public class CoronaApiService {
 
         ResponseEntity<CoronaIn[]> response = restTemplate.getForEntity(coronaApiUrl, CoronaIn[].class);
 
-        if (response.getBody().length != 8){
+        if (response.getBody().length == 8){
             return calculateAverageConfirmed(response.getBody());
-            } else {
+          } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "nope");
         }
     }
@@ -46,7 +51,7 @@ public class CoronaApiService {
             e.printStackTrace();
         }
 
-        c.add(Calendar.DATE, -8);
+        c.add(Calendar.DATE, -7);
         String endDate = formatter.format(c.getTime());
         return endDate;
 

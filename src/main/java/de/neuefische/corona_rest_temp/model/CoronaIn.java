@@ -3,10 +3,17 @@ package de.neuefische.corona_rest_temp.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
-
 public class CoronaIn {
     private String countryCode;
     private Integer confirmed;
+
+    public CoronaIn() {
+    }
+
+    public CoronaIn(String countryCode, Integer confirmed) {
+        this.countryCode = countryCode;
+        this.confirmed = confirmed;
+    }
 
     public String getCountryCode() {
         return countryCode;
