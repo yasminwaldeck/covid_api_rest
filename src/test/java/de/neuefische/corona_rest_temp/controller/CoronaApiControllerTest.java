@@ -1,9 +1,7 @@
 package de.neuefische.corona_rest_temp.controller;
 
-import de.neuefische.corona_rest_temp.model.CoronaFrontEnd;
-import de.neuefische.corona_rest_temp.service.CoronaApiService;
+import de.neuefische.corona_rest_temp.model.CoronaOut;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
@@ -27,10 +25,27 @@ public class CoronaApiControllerTest {
     public void getCoronaAverageTest(){
         //GIVEN
         RestTemplate restTemplate = new RestTemplate();
-        CoronaFrontEnd expected = new CoronaFrontEnd("DE", Integer.valueOf(17676));
+        CoronaOut expected = new CoronaOut("DE", Integer.valueOf(17676));
 
         //WHEN
-        ResponseEntity<CoronaFrontEnd> response = restTemplate.getForEntity("http://localhost:" + port + "/corona/?countryCode=DE&date=2021-05-05", CoronaFrontEnd.class);
+        ResponseEntity<CoronaOut> response = restTemplate.getForEntity("http://localhost:" + port + "/corona/?countryCode=DE&date=2021-05-05", CoronaOut.class);
+
+        //THEN
+
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(expected));
+
+    }
+
+
+    @Test
+    public void schoolsRunningOrSchoolsRunningNotThatsTheQuestion(){
+        //GIVEN
+        RestTemplate restTemplate = new RestTemplate();
+        String expected = "Schule läuft";
+
+        //WHEN
+        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:" + port + "/corona/schools/?countryCode=DE&date=2021-05-05", String.class);
 
         //THEN
 

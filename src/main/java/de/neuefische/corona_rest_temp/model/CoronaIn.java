@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class CoronaBackEnd {
+public class CoronaIn {
     private String countryCode;
     private Integer confirmed;
 
@@ -30,7 +30,7 @@ public class CoronaBackEnd {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CoronaBackEnd that = (CoronaBackEnd) o;
+        CoronaIn that = (CoronaIn) o;
         return Objects.equals(countryCode, that.countryCode) && Objects.equals(confirmed, that.confirmed);
     }
 

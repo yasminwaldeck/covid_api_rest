@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class CoronaFrontEnd {
+public class CoronaOut {
 
     @JsonProperty("CountryCode")
     private String countryCode;
@@ -14,12 +14,12 @@ public class CoronaFrontEnd {
 
 
 
-    public CoronaFrontEnd(String countryCode, Integer average){
+    public CoronaOut(String countryCode, Integer average){
         this.countryCode= countryCode;
         this.average = average;
     }
 
-    public CoronaFrontEnd(){}
+    public CoronaOut(){}
 
     public String getCountryCode() {
         return countryCode;
@@ -41,7 +41,7 @@ public class CoronaFrontEnd {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CoronaFrontEnd that = (CoronaFrontEnd) o;
+        CoronaOut that = (CoronaOut) o;
         return Objects.equals(countryCode, that.countryCode) && Objects.equals(average, that.average);
     }
 
